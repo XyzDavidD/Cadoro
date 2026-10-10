@@ -3,12 +3,11 @@ dist/
 .vercel/
 .env
 .env.*
+*.local
 *.log
 .DS_Store
 *.zip
 /research/
 /evidence/
 /assets/
-/prototype/research/
-/prototype/evidence/
-/package-lock.json
+/prototype/

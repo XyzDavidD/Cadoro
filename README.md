@@ -1,50 +1,44 @@
 # Cadoro wardrobe configurator
 
-Original Romanian-language furniture-configuration proof of concept using React, TypeScript, Vite and React Three Fiber. The application lives in **prototype/**.
+Romanian-language furniture configuration proof of concept built with React, TypeScript, Vite and React Three Fiber. **The application is at the repository root.**
+
+## Deploy to Vercel
+
+Import this GitHub repository into Vercel and click Deploy. Keep Root Directory at its default (the repository root). The included vercel.json declares Vite, npm ci, npm run build and dist, so no prototype subdirectory is needed.
+
+For an existing Vercel project that was previously configured with Root Directory = prototype, reset it to the repository root before redeploying. Fresh imports should use the default root. No environment variables are required for this demonstration.
 
 ## Run locally
 
 ```bash
-cd prototype
 npm ci
 npm run dev
 ```
 
-Open the local address printed by Vite. Run npm commands inside prototype, not the repository root. Node 24.18.0 was used for the local verification.
-
-## Checks
+From the project Mac:
 
 ```bash
-cd prototype
+cd ~/Documents/Cadoro
+npm run dev
+```
+
+## Verify
+
+```bash
 npm test
 npm run build
 ```
 
-The local verification passed 33 unit tests and a TypeScript/Vite production build. Interactive browser and mobile QA remain unverified.
+Node 24.18.0 is used for local verification. Generated files go to dist.
 
-## Vercel
+## Demonstration scope
 
-Import this repository and use:
+Parametric single-wall wardrobes, editable interiors and finishes, demo price breakdowns, JSON import/export, undo/redo and browser-local saving. **All furniture products, dimensions, prices and compatibility rules are demonstrative, not approved Cadoro inventory or real offers.**
 
-| Setting | Value |
-| --- | --- |
-| Root Directory | prototype |
-| Framework Preset | Vite |
-| Install Command | npm ci |
-| Build Command | npm run build |
-| Output Directory | dist |
-| Environment variables | None required for this demo |
-
-The application includes prototype/vercel.json. No deployment has been verified. If Vercel was already imported with the repository root, change Root Directory to prototype and redeploy.
-
-## Scope and limitations
-
-A parametric single-wall wardrobe prototype with demonstration interiors, finishes, prices, JSON import/export and browser-local saving. **All furniture products, dimensions, prices and compatibility rules are demo data, not verified Cadoro inventory or real offers.**
-
-This is not a production-ready quoting or manufacturing tool. It has no backend, account system or customer-inquiry submission. Visual/browser testing remains pending. The 3D bundle triggers a size warning and has not been benchmarked on mobile.
-
-See prototype/README.md for implementation details. Research working papers, local evidence, generated build files, dependencies and archives are intentionally not published in this repository.
+There is no backend, customer-submission service, cloud saving or manufacturing integration. Interactive desktop/mobile browser QA has not been completed. Unit tests and a production build are not proof of visual correctness. The build has a large 3D chunk warning.
 
 ## Branding
 
-The Cadoro wordmark was retrieved from https://www.cadoro.ro/ for this requested proof of concept. Trademark ownership remains with Cadoro; obtain approval before commercial use. No IKEA code, imagery or models are included.
+The wordmark was retrieved from https://www.cadoro.ro/ for the requested proof of concept. Trademark ownership remains with Cadoro; obtain approval before commercial use. No IKEA code, imagery or models are included.
+
+Research working papers, local evidence, dependencies, backups and archives are kept out of this public repository.
