@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.vercel/
+.env
+.env.*
+*.log
+.DS_Store
+*.zip
+/research/
+/evidence/
+/assets/
+/prototype/research/
+/prototype/evidence/
+/package-lock.json
