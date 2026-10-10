@@ -178,3 +178,13 @@ body {
   .header { justify-content: center; }
   .header-actions { justify-content: center; }
 }
+
+/* Camera fit controls: keep the viewport usable and the refit button visible. */
+.stage canvas { display: block; width: 100% !important; height: 100% !important; }
+.fit-view-btn {
+  position: absolute; right: 12px; bottom: 12px; z-index: 5;
+  padding: 7px 14px; border-radius: 6px; border: 1px solid var(--panel-edge);
+  background: var(--panel); color: var(--text); font: inherit; font-size: 13px;
+  cursor: pointer;
+}
+.fit-view-btn:hover { border-color: var(--accent); color: var(--accent); }

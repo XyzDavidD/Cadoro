@@ -21,9 +21,25 @@ const SIDE_COLOR = '#cfd2d6';
 const PANEL_COLOR = '#c8ccd2';
 const BACK_COLOR = '#bfc3c9';
 const DOOR_EDGE = '#e8e6e1';
-const DRAWER_COLOR = '#d0d3d8';
 const RAIL_COLOR = '#9aa0a8';
 const PLINTH_COLOR = '#3a3d40';
+const HANDLE_COLOR = '#8f949c';
+
+// Drawer construction constants. All values in mm, module-local coordinates
+// (x from the module's left edge, y from the module floor, z from the back of
+// the carcass). Drawer fronts stay behind the closed-door plane at
+// CARCASS_DEPTH_MM and the boxes stay inside the carcass cavity.
+const BACK_PANEL_THICKNESS_MM = 10; // matches the back panel in carcassGeometry
+const DRAWER_FRONT_THICKNESS_MM = 18;
+const DRAWER_PANEL_THICKNESS_MM = 15; // drawer sides / back / bottom
+const DRAWER_FRONT_REVEAL_MM = 4; // gap between a front and the carcass sides
+const DRAWER_BOX_INSET_MM = 8; // drawer box narrower than the interior, per side
+const DRAWER_VERTICAL_REVEAL_MM = 4; // readable gap between stacked fronts
+const DRAWER_FRONT_RECESS_MM = 10; // front face sits this far behind the carcass front edge
+const DRAWER_BACK_CLEARANCE_MM = 10; // box rear sits behind the back panel face
+const DRAWER_TOP_CLEARANCE_MM = 6; // air above each drawer box under the next unit
+const DRAWER_HANDLE_LENGTH_MM = 140;
+const DRAWER_HANDLE_SECTION_MM = 14; // height and depth of the pull bar
 
 function push(
   boxes: BoxSpec[],
@@ -42,6 +58,13 @@ function push(
   });
 }
 
+/** Slightly darker tone of a #rrggbb color, for drawer box internals. */
+function shadeColor(hex: string, factor: number): string {
+  const v = parseInt(hex.slice(1), 16);
+  const channel = (shift: number) => Math.min(255, Math.max(0, Math.round(((v >> shift) & 0xff) * factor)));
+  return `#${((channel(16) << 16) | (channel(8) << 8) | channel(0)).toString(16).padStart(6, '0')}`;
+}
+
 /** Panels of the carcass for one module. Local coordinates start at the module's left edge. */
 export function carcassGeometry(mod: ModulePlan, design: Design): BoxSpec[] {
   const w = mod.width;
@@ -52,7 +75,7 @@ export function carcassGeometry(mod: ModulePlan, design: Design): BoxSpec[] {
   push(boxes, w - PANEL_MM, 0, 0, PANEL_MM, h, CARCASS_DEPTH_MM, SIDE_COLOR); // right side
   push(boxes, PANEL_MM, 0, 0, iw, PANEL_MM, CARCASS_DEPTH_MM, PANEL_COLOR); // bottom
   push(boxes, PANEL_MM, h - PANEL_MM, 0, iw, PANEL_MM, CARCASS_DEPTH_MM, PANEL_COLOR); // top
-  push(boxes, PANEL_MM, PANEL_MM, 0, iw, h - 2 * PANEL_MM, 10, BACK_COLOR); // back
+  push(boxes, PANEL_MM, PANEL_MM, 0, iw, h - 2 * PANEL_MM, BACK_PANEL_THICKNESS_MM, BACK_COLOR); // back
   return boxes;
 }
 
@@ -60,18 +83,54 @@ export function carcassGeometry(mod: ModulePlan, design: Design): BoxSpec[] {
 export function fittingGeometry(mod: ModulePlan, design: Design): BoxSpec[] {
   const boxes: BoxSpec[] = [];
   const iw = mod.interiorWidth;
-  void design;
+  // Element y values are interior-local (above the interior floor); the
+  // carcass bottom panel occupies module-local y 0..PANEL_MM, so every fitting
+  // is lifted onto the real interior floor.
+  const baseY = PANEL_MM;
   for (const e of mod.elements) {
     if (e.kind === 'shelf') {
-      push(boxes, PANEL_MM, e.y, 40, iw, SHELF_THICKNESS_MM, INTERIOR_DEPTH_MM - 40, PANEL_COLOR);
+      push(boxes, PANEL_MM, baseY + e.y, 40, iw, SHELF_THICKNESS_MM, INTERIOR_DEPTH_MM - 40, PANEL_COLOR);
     } else if (e.kind === 'rail') {
-      push(boxes, PANEL_MM, e.y, CARCASS_DEPTH_MM / 2 - 80, iw, RAIL_DIAMETER_MM, 60, RAIL_COLOR);
+      push(boxes, PANEL_MM, baseY + e.y, CARCASS_DEPTH_MM / 2 - 80, iw, RAIL_DIAMETER_MM, 60, RAIL_COLOR);
     } else if (e.kind === 'drawers') {
-      const n = e.drawersCount ?? 2;
+      const n = (e.drawersCount ?? 2) as 2 | 3;
       const du = e.height / n;
+      const finishColor = carcassColor(design.carcassFinishCode);
+      const boxColor = shadeColor(finishColor, 0.85);
+      // Fronts: nearly full interior width, sitting just behind the door plane.
+      const frontX = PANEL_MM + DRAWER_FRONT_REVEAL_MM;
+      const frontW = iw - 2 * DRAWER_FRONT_REVEAL_MM;
+      const frontZ1 = CARCASS_DEPTH_MM - DRAWER_FRONT_RECESS_MM;
+      const frontZ0 = frontZ1 - DRAWER_FRONT_THICKNESS_MM;
+      // Box: behind the front, clear of the back panel.
+      const boxX = PANEL_MM + DRAWER_BOX_INSET_MM;
+      const boxW = iw - 2 * DRAWER_BOX_INSET_MM;
+      const backW = boxW - 2 * DRAWER_PANEL_THICKNESS_MM;
+      const boxZ0 = BACK_PANEL_THICKNESS_MM + DRAWER_BACK_CLEARANCE_MM;
+      const boxDepth = frontZ0 - boxZ0;
+      const bankY = baseY + e.y; // bottom of the drawer bank on the interior floor
+      const frontH = Math.max(du - DRAWER_VERTICAL_REVEAL_MM, 20);
+      const sideH = Math.max(du - DRAWER_PANEL_THICKNESS_MM - DRAWER_VERTICAL_REVEAL_MM - DRAWER_TOP_CLEARANCE_MM, 10);
       for (let i = 0; i < n; i++) {
-        const y = e.y + i * du;
-        push(boxes, PANEL_MM + 6, y + 10, CARCASS_DEPTH_MM - 90, iw - 12, du - 20, 300, DRAWER_COLOR);
+        const u0 = bankY + i * du;
+        const frontY = u0 + DRAWER_VERTICAL_REVEAL_MM / 2;
+        push(boxes, frontX, frontY, frontZ0, frontW, frontH, DRAWER_FRONT_THICKNESS_MM, finishColor); // front
+        push(boxes, boxX, u0, boxZ0, boxW, DRAWER_PANEL_THICKNESS_MM, boxDepth, boxColor); // bottom
+        push(boxes, boxX, u0 + DRAWER_PANEL_THICKNESS_MM, boxZ0, DRAWER_PANEL_THICKNESS_MM, sideH, boxDepth, boxColor); // left side
+        push(boxes, boxX + boxW - DRAWER_PANEL_THICKNESS_MM, u0 + DRAWER_PANEL_THICKNESS_MM, boxZ0, DRAWER_PANEL_THICKNESS_MM, sideH, boxDepth, boxColor); // right side
+        push(boxes, boxX + DRAWER_PANEL_THICKNESS_MM, u0 + DRAWER_PANEL_THICKNESS_MM, boxZ0, backW, sideH, DRAWER_PANEL_THICKNESS_MM, boxColor); // back
+        // Restrained pull bar, centered on the front, fully behind the door plane.
+        const handleW = Math.min(DRAWER_HANDLE_LENGTH_MM, frontW * 0.5);
+        push(
+          boxes,
+          frontX + (frontW - handleW) / 2,
+          frontY + frontH / 2 - DRAWER_HANDLE_SECTION_MM / 2,
+          frontZ1,
+          handleW,
+          DRAWER_HANDLE_SECTION_MM,
+          5,
+          HANDLE_COLOR
+        );
       }
     }
   }
