@@ -1,0 +1,184 @@
+{
+  "_readme": "Asset manifest for the Cadoro wardrobe configurator redesign. All source assets are CC0 (public domain) from Poly Haven. Downloaded as JPG from Poly Haven CDN, converted locally to WebP. No runtime hotlinks; files are committed under public/assets/. Grain direction and tint notes are per material.",
+  "generatedFor": "Cadoro wardrobe configurator redesign (demo, not affiliated with cadoro.ro or IKEA)",
+  "materials": {
+    "oak": {
+      "id": "oak_veneer_01",
+      "title": "Oak Veneer 01",
+      "provider": "Poly Haven",
+      "sourceUrl": "https://polyhaven.com/a/oak_veneer_01",
+      "downloadBaseUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/oak_veneer_01/",
+      "author": "Jenelle van Heerden",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://polyhaven.com/license (CC0 1.0, public domain; Creative Commons license text: https://creativecommons.org/publicdomain/zero/1.0/)",
+      "physicalTileSize_m": 1.83,
+      "materialRole": "Primary wardrobe carcass + door veneer (light oak)",
+      "colorSpaceIntent": {
+        "basecolor": "sRGB",
+        "normal": "linear (OpenGL +Y, gl normal map)",
+        "roughness": "linear (non-color)"
+      },
+      "maps": {
+        "1k": [
+          "basecolor-1k.webp",
+          "normal-1k.webp",
+          "roughness-1k.webp"
+        ],
+        "2k": [
+          "basecolor-2k.webp",
+          "normal-2k.webp",
+          "roughness-2k.webp",
+          "basecolor-2k-hi.webp"
+        ]
+      },
+      "note": "2048px close-up variant (basecolor-2k-hi.webp, q86) for door close-ups; grain runs vertical as captured; measured repeat 1.83 m per tile.",
+      "thumb": "thumb.webp",
+      "downscale": "1K for all UI/scene defaults; 2K optional close-up.",
+      "srgbNote": "Original capture as-is; no baked tint."
+    },
+    "walnut": {
+      "id": "walnut_veneer_02",
+      "title": "Walnut Veneer 02",
+      "provider": "Poly Haven",
+      "sourceUrl": "https://polyhaven.com/a/walnut_veneer_02",
+      "downloadBaseUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/walnut_veneer_02/",
+      "author": "Jenelle van Heerden",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://polyhaven.com/license (CC0 1.0, public domain; Creative Commons license text: https://creativecommons.org/publicdomain/zero/1.0/)",
+      "physicalTileSize_m": 1.0,
+      "materialRole": "Accent veneer (distinct from oak)",
+      "colorSpaceIntent": {
+        "basecolor": "sRGB",
+        "normal": "linear (OpenGL +Y, gl normal map)",
+        "roughness": "linear (non-color)"
+      },
+      "maps": {
+        "1k": [
+          "basecolor-1k.webp",
+          "normal-1k.webp",
+          "roughness-1k.webp"
+        ],
+        "2k": [
+          "basecolor-2k.webp",
+          "normal-2k.webp",
+          "roughness-2k.webp"
+        ]
+      },
+      "note": "Species documented by provider as walnut veneer. Grain runs HORIZONTAL as captured; rotate UV 90 deg (texture.rotation = Math.PI/2) for vertical wardrobe doors. Repeat 1.0 m per tile.",
+      "thumb": "thumb.webp"
+    },
+    "smoked-oak": {
+      "id": "oak_veneer_01 (derived: smoked tint)",
+      "title": "Smoked Oak (derived)",
+      "provider": "Poly Haven",
+      "sourceUrl": "https://polyhaven.com/a/oak_veneer_01",
+      "downloadBaseUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/oak_veneer_01 (derived: smoked tint)/",
+      "author": "Jenelle van Heerden (source)",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://polyhaven.com/license (CC0 1.0, public domain; Creative Commons license text: https://creativecommons.org/publicdomain/zero/1.0/)",
+      "physicalTileSize_m": 1.83,
+      "materialRole": "Dark accent veneer",
+      "colorSpaceIntent": {
+        "basecolor": "sRGB",
+        "normal": "linear (OpenGL +Y, gl normal map)",
+        "roughness": "linear (non-color)"
+      },
+      "maps": {
+        "base": [
+          "basecolor.webp",
+          "normal.webp",
+          "roughness.webp"
+        ]
+      },
+      "note": "Derived locally from oak_veneer_01: grayscale luminance remapped to dark charcoal-brown (R*0.42,G*0.38,B*0.34), contrast +15%. Grain structure preserved from source oak; NOT a distinct species. Normal/roughness maps are re-encoded copies of oak_veneer_01 (1K).",
+      "derivation": "CC0 source allows any derivative; no attribution required, documented for provenance.",
+      "thumb": "thumb.webp"
+    },
+    "floor": {
+      "id": "herringbone_parquet",
+      "title": "Herringbone Parquet",
+      "provider": "Poly Haven",
+      "sourceUrl": "https://polyhaven.com/a/herringbone_parquet",
+      "downloadBaseUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/herringbone_parquet/",
+      "author": "Jenelle van Heerden, Sergej Majboroda",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://polyhaven.com/license (CC0 1.0, public domain; Creative Commons license text: https://creativecommons.org/publicdomain/zero/1.0/)",
+      "physicalTileSize_m": 3.4,
+      "materialRole": "Light wood herringbone floor of the reference room",
+      "colorSpaceIntent": {
+        "basecolor": "sRGB",
+        "normal": "linear (OpenGL +Y, gl normal map)",
+        "roughness": "linear (non-color)"
+      },
+      "maps": {
+        "1k": [
+          "basecolor-1k.webp",
+          "normal-1k.webp",
+          "roughness-1k.webp"
+        ],
+        "2k": [
+          "basecolor-2k.webp",
+          "normal-2k.webp",
+          "roughness-2k.webp"
+        ]
+      },
+      "note": "Herringbone floor pattern; 3.4 m per tile. As captured it reads warm mid-brown; tint lighter/warmer at runtime toward the IKEA reference offwhite room look if needed (runtime material.color multiplier, no baked edit).",
+      "thumb": "thumb.webp"
+    },
+    "plaster": {
+      "id": "white_plaster_02",
+      "title": "White Plaster 02",
+      "provider": "Poly Haven",
+      "sourceUrl": "https://polyhaven.com/a/white_plaster_02",
+      "downloadBaseUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/2k/white_plaster_02/",
+      "author": "Rob Tuytel",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://polyhaven.com/license (CC0 1.0, public domain; Creative Commons license text: https://creativecommons.org/publicdomain/zero/1.0/)",
+      "physicalTileSize_m": 1.0,
+      "materialRole": "Subtle wall surface for the reference room",
+      "colorSpaceIntent": {
+        "basecolor": "sRGB",
+        "normal": "linear (OpenGL +Y, gl normal map)",
+        "roughness": "linear (non-color)"
+      },
+      "maps": {
+        "1k": [
+          "basecolor-1k.webp",
+          "normal-1k.webp",
+          "roughness-1k.webp"
+        ],
+        "2k": [
+          "basecolor-2k.webp",
+          "normal-2k.webp",
+          "roughness-2k.webp"
+        ]
+      },
+      "note": "Subtle fine-grained plaster. As captured it reads warm grey; brighten at runtime toward off-white via material.color multiplier (suggest ~RGB 1.25,1.22,1.15 as starting point, tune visually). No baked tint.",
+      "thumb": "thumb.webp"
+    }
+  },
+  "environment": {
+    "id": "lythwood_room",
+    "title": "Lythwood Room",
+    "provider": "Poly Haven",
+    "sourceUrl": "https://polyhaven.com/a/lythwood_room",
+    "author": "Greg Zaal",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://polyhaven.com/license (CC0 1.0, public domain; Creative Commons license text: https://creativecommons.org/publicdomain/zero/1.0/)",
+    "path": "public/assets/room/lythwood-room_1k.hdr",
+    "format": "Radiance HDR (.hdr), 1K",
+    "downloadUrl": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/lythwood_room_1k.hdr",
+    "md5": "52f078ef15b1d6aed405d54b3b046d5e",
+    "size_bytes": 1487973,
+    "role": "Interior HDRI environment for image-based lighting + soft room reflections in the wardrobe scene",
+    "colorSpaceIntent": "linear HDR (load with THREE.RGBELoader, mapping = EquirectangularReflectionMapping)"
+  },
+  "conversion": "Downloaded JPG from Poly Haven CDN -> PIL LANCZOS downscale (1024 or 2048 long edge) -> WebP encode (quality: 80-90 per material role). Normal maps and roughness maps kept in linear data space (no sRGB transform applied during conversion).",
+  "assetPackageSizeMB": "~11 MB uncompressed on disk (all WebP + 1 HDR)",
+  "verification": "Each material was visually inspected from a rendered thumbnail; species and pattern match the provider description on the corresponding polyhaven.com asset page.",
+  "notIncluded": {
+    "cadoro_product_imagery": "cadoro.ro catalogs page renders via client-side JS with no publicly downloadable catalog/product assets discoverable; no Cadoro-branded imagery or 3D models were used. Branding stays in app source (white logo SVG).",
+    "ikea_assets": "No IKEA assets, branding, or planner code were copied. IKEA reference pages were used only as visual/design reference.",
+    "clothes_models": "No suitable CC0 clothes/organizer models found on Poly Haven (nearest: wicker baskets, suitcase, life jacket - not credible wardrobe contents); omitted rather than substituting."
+  }
+}

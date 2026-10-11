@@ -1,0 +1,372 @@
+{
+  "title": "Cadoro wardrobe configurator redesign candidate, baseline-to-candidate manifest",
+  "baselineCommit": "ccd5e0072988b9333fc6dda73bcf21a4a1430fda",
+  "baselineSnapshot": "redesign-input.zip, unmodified snapshot used for comparison",
+  "comparisonRules": "SHA-256 comparison of all files in the baseline snapshot and candidate. node_modules, dist and .git are excluded. This manifest excludes itself from the file inventory.",
+  "preservedDeploymentRoot": {
+    "applicationRoot": ".",
+    "packageJson": "package.json (unchanged)",
+    "vercelConfig": "vercel.json (unchanged)"
+  },
+  "changedFiles": [
+    {
+      "path": "README.md",
+      "baselineSha256": "6bf6f20b3c6c951a5c6a3ef6a939d68dceb3a0d7fa0620cfe12d8117c876aa22",
+      "candidateSha256": "ca8d6f758e161020860b5b6fa2b660a6ae2fca42121ee0d4763b21c51cdd4e64"
+    },
+    {
+      "path": "src/state/store.ts",
+      "baselineSha256": "69cefcc91a9eddd439c264acf6b8aa879e2dd79df3d267b2032f6215424a3f44",
+      "candidateSha256": "63949dfd1fdf033485ca51d869cc2ad89d83d3fbbc90441fd421437aa7d6b13d"
+    },
+    {
+      "path": "src/three/Scene.tsx",
+      "baselineSha256": "be3ac0ee2b06641159e094171eb37c8dff3d56c3a6fa99ef03b6b1eab37814c2",
+      "candidateSha256": "db738635a1dd5eeb17901061950dd86d4ea1d2233dff14bba66af4e427ff5adc"
+    },
+    {
+      "path": "src/three/geometry.ts",
+      "baselineSha256": "0e8471079e8e471d33d01e7ea9c93643d4784c17a7f24c2cf07c0708d2294cb2",
+      "candidateSha256": "c0bef9363ee56983d1dda242f0471917a70fdc0a35fe5f92623aabc71c5bf253"
+    },
+    {
+      "path": "src/ui/App.tsx",
+      "baselineSha256": "e18d26d5aa3783b047575af4196abf174ec6ca25d73f903738d97a6731ee91cc",
+      "candidateSha256": "a41b9dd05feed79fb04190febbb81efde6c83ef22658ec9f8189b50c290652c6"
+    },
+    {
+      "path": "src/ui/DemoBanner.tsx",
+      "baselineSha256": "50029bda04c0211b62e2830a936be631c0d225487fb84460cc710c61875e8c64",
+      "candidateSha256": "2716b984c32b0759c02ae4c65f8ed90cdd2b2b8253cbee3d849e72696d0b8b5f"
+    },
+    {
+      "path": "src/ui/Footer.tsx",
+      "baselineSha256": "baab7259e7b640cead1d1c500df59dc8e93a257e724062b91bee832f13c5754c",
+      "candidateSha256": "d60b361ee7fdd4b3f74086927037a4bf0f9e9f5cb8ea2781abb4e461ffc4f3b3"
+    },
+    {
+      "path": "src/ui/Toasts.tsx",
+      "baselineSha256": "4b533ea6f778f9a6da91df47ad00f25a9c29b7069ae458eaf94096b7b62756d9",
+      "candidateSha256": "599cc711814bd265785e45f4be21ad4c2759e84baa3f9558f0b616b5077adcb1"
+    },
+    {
+      "path": "src/ui/styles.css",
+      "baselineSha256": "e85d787562b86c02e5267c3a98892d98efcb4da28f837482e80bfc6579053ce6",
+      "candidateSha256": "d89def8cbfe172df69a7b3392e73a51751ef4b8b859d017378f6989ae2f952d3"
+    }
+  ],
+  "addedFiles": [
+    {
+      "path": "ASSET-LICENSES.md",
+      "candidateSha256": "446e5b085974a243cea84085f2db21421030c3909f224ba13b4d3d9989a49d47",
+      "sizeBytes": 2729
+    },
+    {
+      "path": "CHANGE-MANIFEST.md",
+      "candidateSha256": "887b36e5e4dd69ff50df5da7746a7b245630bae780cefdc171823e0be603d072",
+      "sizeBytes": 1731
+    },
+    {
+      "path": "docs/README.md",
+      "candidateSha256": "de8ab3ea5949d9bb29cf306f3d30f4677507545cb37477bca87dd775130423b1",
+      "sizeBytes": 353
+    },
+    {
+      "path": "docs/ui-redesign-notes.md",
+      "candidateSha256": "2d3088865aee5f130228a7e210d9ba211e85c034c2aa061f9f01cb87e9aaf481",
+      "sizeBytes": 3708
+    },
+    {
+      "path": "docs/visual-qa.md",
+      "candidateSha256": "6084340240e35722ea0a08c52235f9c06f84ad6135e136d2bfdb7093e4d2b9f6",
+      "sizeBytes": 2869
+    },
+    {
+      "path": "docs/wp2-manifest.json",
+      "candidateSha256": "e11353f185c485075c265ecf86e64ce87eb5adb8502753f39274064656631cf6",
+      "sizeBytes": 3304
+    },
+    {
+      "path": "public/assets/materials/floor/basecolor-1k.webp",
+      "candidateSha256": "becba942016c150bd8cf712c1dd8ba6342989f2fc8a42b5227b83fbbcc19ca61",
+      "sizeBytes": 153952
+    },
+    {
+      "path": "public/assets/materials/floor/basecolor-2k.webp",
+      "candidateSha256": "60bb3f217c081c98d465221344543d968807e18559c8a38233cf25acb1982063",
+      "sizeBytes": 702040
+    },
+    {
+      "path": "public/assets/materials/floor/normal-1k.webp",
+      "candidateSha256": "96eee5a2be45e176d9e0379a8db6e1d1cce4dc1428e0e72e9e0b4fcb699663fc",
+      "sizeBytes": 8686
+    },
+    {
+      "path": "public/assets/materials/floor/normal-2k.webp",
+      "candidateSha256": "4a761c91f00c3dd628111d4daf06110a6235c3e61ee30a834c0bbbfd1487cb57",
+      "sizeBytes": 50868
+    },
+    {
+      "path": "public/assets/materials/floor/roughness-1k.webp",
+      "candidateSha256": "886b8764ab1452094ebf1135d2c150f4d0bfb9986124947b6daaba62b78b166f",
+      "sizeBytes": 49000
+    },
+    {
+      "path": "public/assets/materials/floor/roughness-2k.webp",
+      "candidateSha256": "40d69b1d908e190b29352b6dbd4818ce7f2166e9abdcbef462acaf6725a2a0f6",
+      "sizeBytes": 318902
+    },
+    {
+      "path": "public/assets/materials/floor/thumb.webp",
+      "candidateSha256": "2782f4dbcfbef3a6e82c67c82c55e33d2aca2f1bf23eba176d3643e835eec8f9",
+      "sizeBytes": 5806
+    },
+    {
+      "path": "public/assets/materials/manifest.json",
+      "candidateSha256": "b9655c5d92058ab2b38faf569d40b4ea900342f6e04ea454b7c61d914ea94917",
+      "sizeBytes": 9073
+    },
+    {
+      "path": "public/assets/materials/oak/basecolor-1k.webp",
+      "candidateSha256": "765d4f5a6d83143c533fa086f770f2d7d97e5d318c15bf2491e1f5c3ca0372e8",
+      "sizeBytes": 148710
+    },
+    {
+      "path": "public/assets/materials/oak/basecolor-2k-hi.webp",
+      "candidateSha256": "5c4c330d785fbf55140f655c1b077d3cd1f07d75b108a7c99ac0a9e57440f6d7",
+      "sizeBytes": 625358
+    },
+    {
+      "path": "public/assets/materials/oak/basecolor-2k.webp",
+      "candidateSha256": "110bc7864790543fc253abba57ec2d5c48398958ecaef4b1990743b5eca72a88",
+      "sizeBytes": 439920
+    },
+    {
+      "path": "public/assets/materials/oak/normal-1k.webp",
+      "candidateSha256": "9aa27ea296fe4ce92920add2cadf281d7ae280c6a19256b2ed6c0e7beb07ac4f",
+      "sizeBytes": 53462
+    },
+    {
+      "path": "public/assets/materials/oak/normal-2k.webp",
+      "candidateSha256": "d58a0089026845339a3906f7939661009493e6c9dbfb7d9ee7381a4fd38a0812",
+      "sizeBytes": 135618
+    },
+    {
+      "path": "public/assets/materials/oak/roughness-1k.webp",
+      "candidateSha256": "ef7d8a3032e36ae1c545af1d7dda533230423bd469097086e80575394114b9e0",
+      "sizeBytes": 361326
+    },
+    {
+      "path": "public/assets/materials/oak/roughness-2k.webp",
+      "candidateSha256": "ab5a5c620b881e4c7660a22576efea2bc9b50a8c3bc4b8e3fb4e83897615b99f",
+      "sizeBytes": 1447070
+    },
+    {
+      "path": "public/assets/materials/oak/thumb.webp",
+      "candidateSha256": "432da4e14cae66abdca4dd486cd0ff0369158385e8b006e87b6c4370dac23ee7",
+      "sizeBytes": 4414
+    },
+    {
+      "path": "public/assets/materials/plaster/basecolor-1k.webp",
+      "candidateSha256": "e710323db6533fdfd63702d89f52e790d059ee084ba790085234ec09e4300090",
+      "sizeBytes": 255206
+    },
+    {
+      "path": "public/assets/materials/plaster/basecolor-2k.webp",
+      "candidateSha256": "278b8fdcf1201495ec835820e77b9b90b0289bd4cad4c98e07b6934fee1bcbcb",
+      "sizeBytes": 1259658
+    },
+    {
+      "path": "public/assets/materials/plaster/normal-1k.webp",
+      "candidateSha256": "f87e297426e58fc48da19325d1bb1824f664ef09230e2ba693eca3153d86d0c4",
+      "sizeBytes": 144664
+    },
+    {
+      "path": "public/assets/materials/plaster/normal-2k.webp",
+      "candidateSha256": "9cb9088826944b6a4d7c76c9e29a7dee92398582304d3d9835b88b7fe1d096f9",
+      "sizeBytes": 834368
+    },
+    {
+      "path": "public/assets/materials/plaster/roughness-1k.webp",
+      "candidateSha256": "aa16ecc5a46ed35300c424bcf398290bbcae207829aac3ee5a559dbeb573bf3f",
+      "sizeBytes": 87254
+    },
+    {
+      "path": "public/assets/materials/plaster/roughness-2k.webp",
+      "candidateSha256": "4acb7e22044462f389b65ad832f818e304cc4864e3bfe5c87f60f39307cb1d8f",
+      "sizeBytes": 641982
+    },
+    {
+      "path": "public/assets/materials/plaster/thumb.webp",
+      "candidateSha256": "21fbc915a00655bdf95c2f1df9b24ba65e0d25f01a3fa20035155a196b51f0ff",
+      "sizeBytes": 3082
+    },
+    {
+      "path": "public/assets/materials/smoked-oak/basecolor.webp",
+      "candidateSha256": "9feb9b4c9aee1cf8e838b0e07aa3d530e00db38ed8f5e8ac00a2ff4c6f57b70e",
+      "sizeBytes": 205882
+    },
+    {
+      "path": "public/assets/materials/smoked-oak/normal.webp",
+      "candidateSha256": "41423fea387825d4d2e79af6810b1ff2333b5449f09f91b4f4030673f87406cd",
+      "sizeBytes": 21598
+    },
+    {
+      "path": "public/assets/materials/smoked-oak/roughness.webp",
+      "candidateSha256": "60179e8bf120978eb9f713a06ff551832a530317a37674617aac5194a1efcc78",
+      "sizeBytes": 294608
+    },
+    {
+      "path": "public/assets/materials/smoked-oak/thumb.webp",
+      "candidateSha256": "5cbd1ac176487e9caebfa7d4617adabf6f92fe9f2a29c7674b8d934c40b04b52",
+      "sizeBytes": 1490
+    },
+    {
+      "path": "public/assets/materials/walnut/basecolor-1k.webp",
+      "candidateSha256": "ca6491ac9eb37466e45bd422b575652e319fce8d1e3ab8b45188b915703d320d",
+      "sizeBytes": 89134
+    },
+    {
+      "path": "public/assets/materials/walnut/basecolor-2k.webp",
+      "candidateSha256": "f192274d32921c53566d816fafe244b93bde11336dea9592f853d54c28290b6f",
+      "sizeBytes": 305584
+    },
+    {
+      "path": "public/assets/materials/walnut/normal-1k.webp",
+      "candidateSha256": "1c024a8085693e32a66361ca7a1d01f48757d58dc794aee60edc190d60012142",
+      "sizeBytes": 8276
+    },
+    {
+      "path": "public/assets/materials/walnut/normal-2k.webp",
+      "candidateSha256": "1bfce3cbd138c3c2602254e0b594bcc15d055878f3013781fb47f92438acedde",
+      "sizeBytes": 54052
+    },
+    {
+      "path": "public/assets/materials/walnut/roughness-1k.webp",
+      "candidateSha256": "559111acd18770974dc034f55acf2c5ed85b09ca7003d3f023871053fe3286aa",
+      "sizeBytes": 230086
+    },
+    {
+      "path": "public/assets/materials/walnut/roughness-2k.webp",
+      "candidateSha256": "023fe26fe44e1d30c08fa6cde54d67cb6883501c8814c31dbaec0ce767462e12",
+      "sizeBytes": 871088
+    },
+    {
+      "path": "public/assets/materials/walnut/thumb.webp",
+      "candidateSha256": "c7755de50296404911f65daea21341b8bc7d150812506fd0bd214cf603f62ba1",
+      "sizeBytes": 3474
+    },
+    {
+      "path": "public/assets/room/lythwood-room_1k.hdr",
+      "candidateSha256": "c21b044a04e93a1828abcf3a8f03ad849cc5f15abfd8540d17f2a262578c5936",
+      "sizeBytes": 1487973
+    },
+    {
+      "path": "src/domain/presets.test.ts",
+      "candidateSha256": "eb38133a426b7cb831185bf890e17167ecb27de0cc85d90347afc0f4fd8528c5",
+      "sizeBytes": 2871
+    },
+    {
+      "path": "src/domain/presets.ts",
+      "candidateSha256": "0bf4c5e3eeeb410e6125a2d65a00186626d4c893345de6f88b1f4bbe5ef3a2d4",
+      "sizeBytes": 4947
+    },
+    {
+      "path": "src/state/presentation.ts",
+      "candidateSha256": "2fdcc6bb38d85c66aa6d90e12d52fad312d4550ed408ec5bde1a40a1a0fbf429",
+      "sizeBytes": 3930
+    },
+    {
+      "path": "src/state/store.test.ts",
+      "candidateSha256": "52e82957efe1a9fc24ef30acfc1fc8b46e82b627dd7762c5dfc41edeec8a583d",
+      "sizeBytes": 6878
+    },
+    {
+      "path": "src/three/materials.test.ts",
+      "candidateSha256": "0cca13e851226aed1a304851b61affdebb964fbb85112ac768a14ebcd4c1345a",
+      "sizeBytes": 5030
+    },
+    {
+      "path": "src/three/materials.ts",
+      "candidateSha256": "dfba1604fa9d009af21202ae3d06b07128d24dff46b14d7b541a62b67b33ff97",
+      "sizeBytes": 5381
+    },
+    {
+      "path": "src/ui/DoorsStep.tsx",
+      "candidateSha256": "9a1ff171d19f3eaacb81c30076da0a6edc98ebca66b27e1f69869080c3956bed",
+      "sizeBytes": 4423
+    },
+    {
+      "path": "src/ui/FinishesStep.tsx",
+      "candidateSha256": "52b8473db4dd725e21e164730363b8b242442bf10711057ce4db2ee545ac15a2",
+      "sizeBytes": 3452
+    },
+    {
+      "path": "src/ui/InteriorStep.tsx",
+      "candidateSha256": "9476ddfc439f94589d57bf286d97512ff39ad055bed9557d66b3d9366c8ff32d",
+      "sizeBytes": 8255
+    },
+    {
+      "path": "src/ui/ModulesStep.tsx",
+      "candidateSha256": "22a535172f0f0c12f268bc4cdcb8aff6d0a86f5b7a9dd7a0619c4c70650651cb",
+      "sizeBytes": 6154
+    },
+    {
+      "path": "src/ui/Sidebar.tsx",
+      "candidateSha256": "eb7114b5c4d8c8db6ab8c2682b59b60a4fdd1a87a55f8a6a0dfd7bca9b607a3f",
+      "sizeBytes": 3443
+    },
+    {
+      "path": "src/ui/SpaceStep.tsx",
+      "candidateSha256": "66e07fd6dcb15f45c3a6a20e9fb29ed93a3039c7687cbf46be5581966f9a0108",
+      "sizeBytes": 10492
+    },
+    {
+      "path": "src/ui/StageToolbar.tsx",
+      "candidateSha256": "c259e721986945167995f8f2cd9853945b00ffae116c37775c29f1dfea88aa1c",
+      "sizeBytes": 3926
+    },
+    {
+      "path": "src/ui/SummaryStep.tsx",
+      "candidateSha256": "e2f2859a66bc84049791522d7d41431713adeedfb6f24b5b941b8b449ce62e8f",
+      "sizeBytes": 4616
+    },
+    {
+      "path": "src/ui/uiHelpers.tsx",
+      "candidateSha256": "4c1773bd3d205723932c1239b0d3985bcfa13c2d307736adacf48c3757ddc7fb",
+      "sizeBytes": 6016
+    }
+  ],
+  "deletedFiles": [
+    {
+      "path": "src/ui/Header.tsx",
+      "baselineSha256": "85dd3ec36c9082b3736ce066a5cdb271e857366e771691f42e6ecc780dff2773"
+    },
+    {
+      "path": "src/ui/Inspector.tsx",
+      "baselineSha256": "c3c2acf0453ac6393dfffa81ecc818a8c7a25bd76db32b7d6bccd76538772d02"
+    },
+    {
+      "path": "src/ui/LeftPanel.tsx",
+      "baselineSha256": "0e0d9f8778cdc8f55a9538787889c9acd282dba861edd352b0502c3e17aa07c3"
+    }
+  ],
+  "candidateAddedFileCountIncludingThisManifest": 57,
+  "assetInventory": {
+    "files": 35,
+    "totalBytes": 11313664,
+    "largestFileBytes": 1487973,
+    "over50MiB": 0,
+    "licenses": "See ASSET-LICENSES.md and public/assets/materials/manifest.json"
+  },
+  "verification": {
+    "tests": "93 passed, 9 test files",
+    "productionBuild": "npm run build succeeded",
+    "visualQA": "Not performed; manual steps are in docs/visual-qa.md",
+    "runtimeAssetPolicy": "Textures, HDR environment and font files are bundled locally; no runtime asset hotlinks"
+  },
+  "limitations": [
+    "Vite reports the existing Three.js bundle exceeds its 500 kB advisory threshold; build succeeds.",
+    "Visual and mobile browser QA have not been performed."
+  ]
+}

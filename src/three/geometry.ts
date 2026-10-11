@@ -3,7 +3,7 @@
 // wardrobe front toward +Z. All inputs and outputs are millimeters; the scene
 // divides by 1000 when placing meshes.
 
-import { CARCASS_DEPTH_MM, INTERIOR_DEPTH_MM, PANEL_MM, RAIL_DIAMETER_MM, SHELF_THICKNESS_MM } from '../domain/catalog';
+import { CARCASS_DEPTH_MM, INTERIOR_DEPTH_MM, PANEL_MM, SHELF_THICKNESS_MM } from '../domain/catalog';
 import type { Design, ModulePlan } from '../domain/types';
 import { PLINTH_HEIGHT_MM } from '../domain/layout';
 
@@ -15,13 +15,15 @@ export interface BoxSpec {
   pos: [number, number, number];
   size: [number, number, number];
   color: string;
+  /** Renderer hint: real finish map for wood panels, or separate hardware material. */
+  surface?: 'finish' | 'metal' | 'plain';
+  finishCode?: string;
 }
 
 const SIDE_COLOR = '#cfd2d6';
 const PANEL_COLOR = '#c8ccd2';
 const BACK_COLOR = '#bfc3c9';
 const DOOR_EDGE = '#e8e6e1';
-const RAIL_COLOR = '#9aa0a8';
 const PLINTH_COLOR = '#3a3d40';
 const HANDLE_COLOR = '#8f949c';
 
@@ -49,12 +51,16 @@ function push(
   sx: number,
   sy: number,
   sz: number,
-  color: string
+  color: string,
+  surface: BoxSpec['surface'] = 'finish',
+  finishCode?: string,
 ): void {
   boxes.push({
     pos: [mm(x + sx / 2), mm(y + sy / 2), mm(z + sz / 2)],
     size: [mm(sx), mm(sy), mm(sz)],
     color,
+    surface,
+    finishCode,
   });
 }
 
@@ -89,9 +95,9 @@ export function fittingGeometry(mod: ModulePlan, design: Design): BoxSpec[] {
   const baseY = PANEL_MM;
   for (const e of mod.elements) {
     if (e.kind === 'shelf') {
-      push(boxes, PANEL_MM, baseY + e.y, 40, iw, SHELF_THICKNESS_MM, INTERIOR_DEPTH_MM - 40, PANEL_COLOR);
+      push(boxes, PANEL_MM, baseY + e.y, 40, iw, SHELF_THICKNESS_MM, INTERIOR_DEPTH_MM - 40, PANEL_COLOR, 'finish', design.carcassFinishCode);
     } else if (e.kind === 'rail') {
-      push(boxes, PANEL_MM, baseY + e.y, CARCASS_DEPTH_MM / 2 - 80, iw, RAIL_DIAMETER_MM, 60, RAIL_COLOR);
+      // The rail is rendered as a true cylinder by WardrobeModule, not a box.
     } else if (e.kind === 'drawers') {
       const n = (e.drawersCount ?? 2) as 2 | 3;
       const du = e.height / n;
@@ -114,11 +120,11 @@ export function fittingGeometry(mod: ModulePlan, design: Design): BoxSpec[] {
       for (let i = 0; i < n; i++) {
         const u0 = bankY + i * du;
         const frontY = u0 + DRAWER_VERTICAL_REVEAL_MM / 2;
-        push(boxes, frontX, frontY, frontZ0, frontW, frontH, DRAWER_FRONT_THICKNESS_MM, finishColor); // front
-        push(boxes, boxX, u0, boxZ0, boxW, DRAWER_PANEL_THICKNESS_MM, boxDepth, boxColor); // bottom
-        push(boxes, boxX, u0 + DRAWER_PANEL_THICKNESS_MM, boxZ0, DRAWER_PANEL_THICKNESS_MM, sideH, boxDepth, boxColor); // left side
-        push(boxes, boxX + boxW - DRAWER_PANEL_THICKNESS_MM, u0 + DRAWER_PANEL_THICKNESS_MM, boxZ0, DRAWER_PANEL_THICKNESS_MM, sideH, boxDepth, boxColor); // right side
-        push(boxes, boxX + DRAWER_PANEL_THICKNESS_MM, u0 + DRAWER_PANEL_THICKNESS_MM, boxZ0, backW, sideH, DRAWER_PANEL_THICKNESS_MM, boxColor); // back
+        push(boxes, frontX, frontY, frontZ0, frontW, frontH, DRAWER_FRONT_THICKNESS_MM, finishColor, 'finish', design.carcassFinishCode); // front
+        push(boxes, boxX, u0, boxZ0, boxW, DRAWER_PANEL_THICKNESS_MM, boxDepth, boxColor, 'finish', design.carcassFinishCode); // bottom
+        push(boxes, boxX, u0 + DRAWER_PANEL_THICKNESS_MM, boxZ0, DRAWER_PANEL_THICKNESS_MM, sideH, boxDepth, boxColor, 'finish', design.carcassFinishCode); // left side
+        push(boxes, boxX + boxW - DRAWER_PANEL_THICKNESS_MM, u0 + DRAWER_PANEL_THICKNESS_MM, boxZ0, DRAWER_PANEL_THICKNESS_MM, sideH, boxDepth, boxColor, 'finish', design.carcassFinishCode); // right side
+        push(boxes, boxX + DRAWER_PANEL_THICKNESS_MM, u0 + DRAWER_PANEL_THICKNESS_MM, boxZ0, backW, sideH, DRAWER_PANEL_THICKNESS_MM, boxColor, 'finish', design.carcassFinishCode); // back
         // Restrained pull bar, centered on the front, fully behind the door plane.
         const handleW = Math.min(DRAWER_HANDLE_LENGTH_MM, frontW * 0.5);
         push(
@@ -129,7 +135,8 @@ export function fittingGeometry(mod: ModulePlan, design: Design): BoxSpec[] {
           handleW,
           DRAWER_HANDLE_SECTION_MM,
           5,
-          HANDLE_COLOR
+          HANDLE_COLOR,
+          'metal'
         );
       }
     }
@@ -141,7 +148,9 @@ export interface DoorSpec {
   pos: [number, number, number];
   size: [number, number, number];
   color: string;
+  finishCode: string;
   hingeSide: 'left' | 'right';
+  slideOffsetX?: number;
   kind: 'hinged' | 'sliding';
   openAngle: number; // radians, 0 = closed
   moduleWidth: number;
@@ -157,8 +166,9 @@ export function doorGeometry(mod: ModulePlan, design: Design, openAmount: number
     for (const leaf of mod.doorLeaves) {
       out.push({
         pos: [mm(x + leaf.width / 2), mm(h / 2), mm(CARCASS_DEPTH_MM + 9)],
-        size: [mm(leaf.width - 4), mm(h - 4), mm(18)],
+        size: [mm(leaf.width - 4), mm(h - 4), mm(20)],
         color: finishColor,
+        finishCode: mod.spec.doorFinishCode,
         hingeSide: leaf.hingeSide,
         kind: 'hinged',
         openAngle: -openAmount * (leaf.hingeSide === 'left' ? Math.PI / 2 : -Math.PI / 2),
@@ -170,20 +180,24 @@ export function doorGeometry(mod: ModulePlan, design: Design, openAmount: number
     const half = mod.width / 2;
     out.push({
       pos: [mm(half / 2), mm(h / 2), mm(CARCASS_DEPTH_MM + 12)],
-      size: [mm(half - 4), mm(h - 4), mm(18)],
+      size: [mm(half - 4), mm(h - 4), mm(20)],
       color: finishColor,
+      finishCode: mod.spec.doorFinishCode,
       hingeSide: 'left',
       kind: 'sliding',
-      openAngle: openAmount * 0.9,
+      slideOffsetX: mm(half * 0.42),
+      openAngle: 0,
       moduleWidth: mod.width,
     });
     out.push({
       pos: [mm(half + half / 2), mm(h / 2), mm(CARCASS_DEPTH_MM + 30)],
-      size: [mm(half - 4), mm(h - 4), mm(18)],
+      size: [mm(half - 4), mm(h - 4), mm(20)],
       color: finishColor,
+      finishCode: mod.spec.doorFinishCode,
       hingeSide: 'right',
       kind: 'sliding',
-      openAngle: -openAmount * 0.9,
+      slideOffsetX: -mm(half * 0.42),
+      openAngle: 0,
       moduleWidth: mod.width,
     });
   }
@@ -217,7 +231,7 @@ export function carcassColor(code: string): string {
 export function plinthSpec(totalWidth: number): BoxSpec {
   return {
     pos: [mm(totalWidth / 2), mm(PLINTH_HEIGHT_MM / 2), mm(CARCASS_DEPTH_MM / 2)],
-    size: [mm(totalWidth), mm(PLINTH_HEIGHT_MM), mm(CARCASS_DEPTH_MM - 60)],
+    size: [mm(totalWidth), mm(PLINTH_HEIGHT_MM), mm(CARCASS_DEPTH_MM - 46)],
     color: PLINTH_COLOR,
   };
 }

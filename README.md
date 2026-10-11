@@ -1,44 +1,39 @@
 # Cadoro wardrobe configurator
 
-Romanian-language furniture configuration proof of concept built with React, TypeScript, Vite and React Three Fiber. **The application is at the repository root.**
+Original Romanian-language furniture configurator with a light interface, local wood textures, room presets and guided editing. The application is at the repository root for a default Vercel import.
 
-## Deploy to Vercel
+## Run
 
-Import this GitHub repository into Vercel and click Deploy. Keep Root Directory at its default (the repository root). The included vercel.json declares Vite, npm ci, npm run build and dist, so no prototype subdirectory is needed.
-
-For an existing Vercel project that was previously configured with Root Directory = prototype, reset it to the repository root before redeploying. Fresh imports should use the default root. No environment variables are required for this demonstration.
-
-## Run locally
+Use Node 24 (or a supported Node >=22 release).
 
 ```bash
 npm ci
 npm run dev
-```
-
-From the project Mac:
-
-```bash
-cd ~/Documents/Cadoro
-npm run dev
-```
-
-## Verify
-
-```bash
 npm test
 npm run build
 ```
 
-Node 24.18.0 is used for local verification. Generated files go to dist.
+## Vercel
 
-## Demonstration scope
+Import this GitHub repository and leave Root Directory at the repository root. vercel.json declares Vite, npm ci, npm run build and dist. No environment variables or backend service are required. Existing projects with an old prototype Root Directory override must clear that override.
 
-Parametric single-wall wardrobes, editable interiors and finishes, demo price breakdowns, JSON import/export, undo/redo and browser-local saving. **All furniture products, dimensions, prices and compatibility rules are demonstrative, not approved Cadoro inventory or real offers.**
+## Features
 
-There is no backend, customer-submission service, cloud saving or manufacturing integration. Interactive desktop/mobile browser QA has not been completed. Unit tests and a production build are not proof of visual correctness. The build has a large 3D chunk warning.
+- Cadoro wordmark, responsive light UI, six guided categories and valid starting presets.
+- User-facing centimetres with integer millimetres internally; carcass and overall plinth-inclusive height are distinguished.
+- Real locally served oak/walnut wood-grain maps, derived smoked oak, lacquer and demo glass finishes; apply to body, doors or both.
+- Softly lit room, floor/wall presets, hardware, contained drawers and optional hanger/lighting details.
+- Orbit/front view, auto-fit, measurement labels, eased hinged/sliding door transforms.
+- History, browser-local saving, legacy JSON import/export, PNG capture and printable demonstration summary.
 
-## Branding
+## Verification
 
-The wordmark was retrieved from https://www.cadoro.ro/ for the requested proof of concept. Trademark ownership remains with Cadoro; obtain approval before commercial use. No IKEA code, imagery or models are included.
+93 unit tests and a TypeScript/Vite production build passed in the final cloud run. A bounded 15-case browser suite passed at desktop (1440x900) and mobile (390x844) viewport sizes with no recorded page/console errors or failed asset requests. Screenshots were inspected separately. Browser tests used Chromium with SwiftShader software rendering; they do not establish real-device GPU performance or cross-browser compatibility. See docs/verification.md.
 
-Research working papers, local evidence, dependencies, backups and archives are kept out of this public repository.
+## Important limitations
+
+All furniture dimensions, rules and prices remain demonstrative, not verified Cadoro inventory or real offers. Materials are visual examples, not calibrated Cadoro finish samples. No cloud accounts, online design links, customer submission, authoritative server quotation, manufacturing/CAD export or multi-tenant SaaS is implemented. Mobile viewport testing is not physical-device certification. The large Three.js chunk warning remains. Development/test dependency advisories require separate maintenance; there is no claim of a complete security audit.
+
+## Assets
+
+See ASSET-LICENSES.md and public/assets/materials/manifest.json for CC0 texture sources and derivations. Cadoro branding remains Cadoro's property and is not covered by the material assets' CC0 license. No IKEA code, artwork or proprietary models are included.
